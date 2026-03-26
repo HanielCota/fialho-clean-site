@@ -12,10 +12,6 @@ export default defineConfig({
     inlineStylesheets: "auto",
   },
 
-  security: {
-    csp: true,
-  },
-
   fonts: [
     {
       provider: fontProviders.google(),
