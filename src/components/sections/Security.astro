@@ -43,7 +43,12 @@ const PILLARS = [
   <div class="pillars-grid">
     {
       PILLARS.map((p) => (
-        <Card title={p.title} description={p.description} icon={p.icon} {...(p.link !== undefined ? { link: p.link } : {})} />
+        <Card
+          title={p.title}
+          description={p.description}
+          icon={p.icon}
+          {...(p.link !== undefined ? { link: p.link } : {})}
+        />
       ))
     }
   </div>
