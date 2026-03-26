@@ -1,5 +1,5 @@
 ---
-import { Home, Trash2, Zap, LayoutGrid, Wrench, Settings } from "@lucide/astro";
+import { House, Trash2, Zap, LayoutGrid, Wrench, Settings } from "@lucide/astro";
 import type { ShowcasePanelId } from "@/types/showcase";
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 const { activeItem } = Astro.props;
 
 const navItems = [
-  { id: "inicio", label: "Início", Icon: Home },
+  { id: "inicio", label: "Início", Icon: House },
   { id: "limpeza", label: "Limpeza", Icon: Trash2 },
   { id: "velocidade", label: "Velocidade", Icon: Zap },
   { id: "apps", label: "Apps", Icon: LayoutGrid },

@@ -61,7 +61,7 @@ export const GET: APIRoute = async () => {
     const sharp = (await import("sharp")).default;
     const png = await sharp(Buffer.from(svg)).png().toBuffer();
 
-    return new Response(png, {
+    return new Response(new Uint8Array(png), {
       headers: { "Content-Type": "image/png" },
     });
   } catch {
