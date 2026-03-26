@@ -33,11 +33,11 @@ export const FAQS = z.array(FaqItemSchema).parse([
   {
     question: "O Windows Defender ou SmartScreen bloqueou o .exe. O que faço?",
     answer:
-      "É um aviso padrão do Windows para executáveis sem assinatura de código paga. O código-fonte está 100% aberto no GitHub para auditoria. Você também pode verificar o arquivo no VirusTotal antes de rodar. Na tela do SmartScreen, clique em 'Mais informações' e depois 'Executar mesmo assim'.",
+      "É o SmartScreen. Aparece em qualquer .exe sem certificado de código pago — não é exclusivo desse app. Antes de rodar, verifica no VirusTotal se quiser. Na tela do aviso: 'Mais informações' → 'Executar mesmo assim'.",
   },
   {
     question: "Como faço backup antes de limpar?",
     answer:
-      "O Fialho Optimizer cria automaticamente um Ponto de Restauração do Sistema antes de qualquer operação destrutiva. Se algo der errado, você pode restaurar pelo Painel de Controle do Windows em menos de 5 minutos.",
+      "Antes de qualquer limpeza, o app cria um Ponto de Restauração automático. Se algo der errado, restaura pelo Painel de Controle do Windows. Leva uns 5 minutos.",
   },
 ]);
