@@ -18,16 +18,16 @@ npm run dev
 
 ## Scripts disponiveis
 
-| Script | O que faz |
-|---|---|
-| `npm run dev` | Dev server com hot reload |
-| `npm run build` | Build de producao |
-| `npm run preview` | Preview do build local |
-| `npm run lint` | Verifica erros de lint |
-| `npm run lint:fix` | Corrige erros de lint |
-| `npm run format` | Formata todos os arquivos |
-| `npm run format:check` | Verifica formatacao |
-| `npm run check` | Type check com Astro |
+| Script                 | O que faz                 |
+| ---------------------- | ------------------------- |
+| `npm run dev`          | Dev server com hot reload |
+| `npm run build`        | Build de producao         |
+| `npm run preview`      | Preview do build local    |
+| `npm run lint`         | Verifica erros de lint    |
+| `npm run lint:fix`     | Corrige erros de lint     |
+| `npm run format`       | Formata todos os arquivos |
+| `npm run format:check` | Verifica formatacao       |
+| `npm run check`        | Type check com Astro      |
 
 ## Convencoes
 

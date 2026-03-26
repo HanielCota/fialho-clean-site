@@ -320,13 +320,12 @@ import { SITE } from "@/config/site";
       toggle.setAttribute("aria-expanded", String(isOpen));
       toggle.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
 
-      if (isOpen) {
-        document.addEventListener("keydown", onEscape);
-        const firstLink = menu.querySelector<HTMLElement>("a");
-        firstLink?.focus();
-      } else {
+      if (!isOpen) {
         document.removeEventListener("keydown", onEscape);
+        return;
       }
+      document.addEventListener("keydown", onEscape);
+      menu.querySelector<HTMLElement>("a")?.focus();
     });
 
     menu.querySelectorAll("[data-menu-close]").forEach((link) => {

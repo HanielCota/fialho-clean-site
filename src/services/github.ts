@@ -1,24 +1,23 @@
-import { z } from "astro/zod";
-import { GitHubRepoSchema, GitHubReleaseSchema } from "@/types/github";
+import { GitHubRepoSchema, GitHubReleasesSchema } from "@/types/github";
 import type { GitHubRepo, GitHubRelease } from "@/types/github";
 import { SITE } from "@/config/site";
 
-const REPO = SITE.repo;
 const BASE = "https://api.github.com/repos";
 const HEADERS = { Accept: "application/vnd.github+json" };
 
 let repoCache: GitHubRepo | null | undefined;
-let releasesCache: GitHubRelease[] | undefined;
+let releasesCache: GitHubRelease[] | null | undefined;
 
 export async function getRepoStats(): Promise<GitHubRepo | null> {
   if (repoCache !== undefined) return repoCache;
   try {
-    const res = await fetch(`${BASE}/${REPO}`, { headers: HEADERS });
+    const res = await fetch(`${BASE}/${SITE.repo}`, { headers: HEADERS });
     if (!res.ok) {
       repoCache = null;
       return null;
     }
-    repoCache = GitHubRepoSchema.parse(await res.json());
+    const parsed = GitHubRepoSchema.safeParse(await res.json());
+    repoCache = parsed.success ? parsed.data : null;
     return repoCache;
   } catch {
     repoCache = null;
@@ -27,17 +26,18 @@ export async function getRepoStats(): Promise<GitHubRepo | null> {
 }
 
 export async function getReleases(): Promise<GitHubRelease[]> {
-  if (releasesCache !== undefined) return releasesCache;
+  if (releasesCache !== undefined) return releasesCache ?? [];
   try {
-    const res = await fetch(`${BASE}/${REPO}/releases?per_page=5`, { headers: HEADERS });
+    const res = await fetch(`${BASE}/${SITE.repo}/releases?per_page=5`, { headers: HEADERS });
     if (!res.ok) {
-      releasesCache = [];
+      releasesCache = null;
       return [];
     }
-    releasesCache = z.array(GitHubReleaseSchema).parse(await res.json());
-    return releasesCache;
+    const parsed = GitHubReleasesSchema.safeParse(await res.json());
+    releasesCache = parsed.success ? parsed.data : null;
+    return releasesCache ?? [];
   } catch {
-    releasesCache = [];
+    releasesCache = null;
     return [];
   }
 }

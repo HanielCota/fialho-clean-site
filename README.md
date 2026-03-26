@@ -24,15 +24,15 @@ Abre em `http://localhost:4321`.
 
 ## Scripts
 
-| Script | O que faz |
-|---|---|
-| `npm run dev` | Dev server |
-| `npm run build` | Build de producao |
-| `npm run preview` | Preview do build |
-| `npm run lint` | ESLint |
-| `npm run format` | Prettier |
-| `npm run check` | Type check |
-| `npm test` | Type check + lint |
+| Script            | O que faz         |
+| ----------------- | ----------------- |
+| `npm run dev`     | Dev server        |
+| `npm run build`   | Build de producao |
+| `npm run preview` | Preview do build  |
+| `npm run lint`    | ESLint            |
+| `npm run format`  | Prettier          |
+| `npm run check`   | Type check        |
+| `npm test`        | Type check + lint |
 
 ## Estrutura
 

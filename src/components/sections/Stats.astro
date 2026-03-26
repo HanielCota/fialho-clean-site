@@ -131,8 +131,11 @@ const stats: StatDisplay[] = [
         ? (Math.round(current * 10) / 10).toFixed(1)
         : String(Math.round(current));
       el.textContent = formatted + suffix;
-      if (p < 1) requestAnimationFrame(tick);
-      else el.textContent = raw;
+      if (p < 1) {
+        requestAnimationFrame(tick);
+        return;
+      }
+      el.textContent = raw;
     }
 
     el.textContent = (isDecimal ? "0.0" : "0") + suffix;
