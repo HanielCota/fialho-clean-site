@@ -14,8 +14,8 @@ import MockButton from "@/components/sections/showcase/MockButton.astro";
 </PanelHeader>
 <div class="cleanup-list">
   <label class="cleanup-row">
-    <span class="ck ck--on"></span>
-    <span class="ck-icon ck-icon--file"
+    <span class="checkbox checkbox--checked"></span>
+    <span class="checkbox-icon checkbox-icon--file"
       ><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
         ><path
           d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"
@@ -30,15 +30,15 @@ import MockButton from "@/components/sections/showcase/MockButton.astro";
           stroke-linejoin="round"></path></svg
       ></span
     >
-    <span class="ck-text"
+    <span class="checkbox-text"
       ><strong>Arquivos Temporários</strong><small>Limpa as pastas temporárias do Windows</small
       ></span
     >
-    <span class="ck-size">2.3 GB</span>
+    <span class="checkbox-size">2.3 GB</span>
   </label>
   <label class="cleanup-row">
-    <span class="ck ck--on"></span>
-    <span class="ck-icon ck-icon--web"
+    <span class="checkbox checkbox--checked"></span>
+    <span class="checkbox-icon checkbox-icon--web"
       ><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
         ><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"></circle><path
           d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"
@@ -46,15 +46,15 @@ import MockButton from "@/components/sections/showcase/MockButton.astro";
           stroke-width="1.5"></path></svg
       ></span
     >
-    <span class="ck-text"
+    <span class="checkbox-text"
       ><strong>Cache do Navegador</strong><small>Dados em cache de todos os navegadores</small
       ></span
     >
-    <span class="ck-size">1.8 GB</span>
+    <span class="checkbox-size">1.8 GB</span>
   </label>
   <label class="cleanup-row">
-    <span class="ck"></span>
-    <span class="ck-icon"
+    <span class="checkbox"></span>
+    <span class="checkbox-icon"
       ><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
         ><path
           d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"
@@ -64,14 +64,14 @@ import MockButton from "@/components/sections/showcase/MockButton.astro";
           stroke-linejoin="round"></path></svg
       ></span
     >
-    <span class="ck-text"
+    <span class="checkbox-text"
       ><strong>Lixeira</strong><small>Arquivos na lixeira do Windows</small></span
     >
-    <span class="ck-size">890 MB</span>
+    <span class="checkbox-size">890 MB</span>
   </label>
   <label class="cleanup-row">
-    <span class="ck ck--on"></span>
-    <span class="ck-icon"
+    <span class="checkbox checkbox--checked"></span>
+    <span class="checkbox-icon"
       ><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
         ><path
           d="M4 19.5A2.5 2.5 0 016.5 17H20"
@@ -86,14 +86,14 @@ import MockButton from "@/components/sections/showcase/MockButton.astro";
           stroke-linejoin="round"></path></svg
       ></span
     >
-    <span class="ck-text"
+    <span class="checkbox-text"
       ><strong>Logs Antigos</strong><small>Logs que podem ser removidos com segurança</small></span
     >
-    <span class="ck-size">340 MB</span>
+    <span class="checkbox-size">340 MB</span>
   </label>
   <label class="cleanup-row">
-    <span class="ck"></span>
-    <span class="ck-icon"
+    <span class="checkbox"></span>
+    <span class="checkbox-icon"
       ><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
         ><path
           d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"
@@ -103,15 +103,15 @@ import MockButton from "@/components/sections/showcase/MockButton.astro";
           stroke-linejoin="round"></path></svg
       ></span
     >
-    <span class="ck-text"
+    <span class="checkbox-text"
       ><strong>Cache do Windows Update</strong><small>Cache de atualizações já instaladas</small
       ></span
     >
-    <span class="ck-size">1.1 GB</span>
+    <span class="checkbox-size">1.1 GB</span>
   </label>
   <label class="cleanup-row">
-    <span class="ck ck--on"></span>
-    <span class="ck-icon"
+    <span class="checkbox checkbox--checked"></span>
+    <span class="checkbox-icon"
       ><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
         ><path
           d="M12 20V10M18 20V4M6 20v-4"
@@ -121,10 +121,10 @@ import MockButton from "@/components/sections/showcase/MockButton.astro";
           stroke-linejoin="round"></path></svg
       ></span
     >
-    <span class="ck-text"
+    <span class="checkbox-text"
       ><strong>Otimização do Sistema</strong><small>Dados redundantes e fragmentos</small></span
     >
-    <span class="ck-size">560 MB</span>
+    <span class="checkbox-size">560 MB</span>
   </label>
 </div>
 <div class="cleanup-footer">
@@ -156,7 +156,7 @@ import MockButton from "@/components/sections/showcase/MockButton.astro";
     border-color: #1e1e1e;
   }
 
-  .ck {
+  .checkbox {
     width: 18px;
     height: 18px;
     border-radius: 4px;
@@ -165,11 +165,11 @@ import MockButton from "@/components/sections/showcase/MockButton.astro";
     position: relative;
     transition: all var(--duration-fast);
   }
-  .ck--on {
+  .checkbox--checked {
     background-color: var(--color-text);
     border-color: var(--color-text);
   }
-  .ck--on::after {
+  .checkbox--checked::after {
     content: "";
     position: absolute;
     top: 1.5px;
@@ -181,7 +181,7 @@ import MockButton from "@/components/sections/showcase/MockButton.astro";
     transform: rotate(45deg);
   }
 
-  .ck-icon {
+  .checkbox-icon {
     width: 32px;
     height: 32px;
     display: flex;
@@ -193,32 +193,32 @@ import MockButton from "@/components/sections/showcase/MockButton.astro";
     color: var(--color-muted-dim);
     flex-shrink: 0;
   }
-  .ck-icon--file {
+  .checkbox-icon--file {
     color: var(--color-info);
   }
-  .ck-icon--web {
+  .checkbox-icon--web {
     color: #a855f7;
   }
 
-  .ck-text {
+  .checkbox-text {
     flex: 1;
     display: flex;
     flex-direction: column;
     min-width: 0;
   }
-  .ck-text strong {
+  .checkbox-text strong {
     font-size: var(--text-sm);
     font-weight: 600;
     color: var(--color-text);
   }
-  .ck-text small {
+  .checkbox-text small {
     font-size: var(--text-xs);
     color: var(--color-muted-dim);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .ck-size {
+  .checkbox-size {
     font-family: var(--font-display);
     font-size: var(--text-sm);
     font-weight: 600;

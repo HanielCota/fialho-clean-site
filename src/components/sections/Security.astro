@@ -4,7 +4,7 @@ import Card from "@/components/ui/Card.astro";
 import { ShieldCheck, SquareCode, WifiOff, Eye } from "@lucide/astro";
 import { SITE } from "@/config/site";
 
-const PILLARS = [
+const SECURITY_PILLARS = [
   {
     icon: ShieldCheck,
     title: "Verificado no VirusTotal",
@@ -42,12 +42,12 @@ const PILLARS = [
 >
   <div class="pillars-grid">
     {
-      PILLARS.map((p) => (
+      SECURITY_PILLARS.map((pillar) => (
         <Card
-          title={p.title}
-          description={p.description}
-          icon={p.icon}
-          {...(p.link !== undefined ? { link: p.link } : {})}
+          title={pillar.title}
+          description={pillar.description}
+          icon={pillar.icon}
+          {...(pillar.link !== undefined ? { link: pillar.link } : {})}
         />
       ))
     }

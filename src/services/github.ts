@@ -48,18 +48,18 @@ export function sumDownloads(releases: GitHubRelease[]): number {
     .reduce((sum, asset) => sum + asset.download_count, 0);
 }
 
-export interface LatestDownload {
+export interface ReleaseDownload {
   url: string;
   version: string | null;
 }
 
-export async function getLatestDownload(): Promise<LatestDownload> {
+export async function getLatestDownload(): Promise<ReleaseDownload> {
   const releases = await getReleases();
   const latest = releases[0];
   if (!latest) return { url: SITE.github.releasesLatest, version: null };
 
-  const exe = latest.assets.find((a) => a.name.endsWith("-setup.exe"));
-  const msi = latest.assets.find((a) => a.name.endsWith(".msi"));
+  const exe = latest.assets.find((asset) => asset.name.endsWith("-setup.exe"));
+  const msi = latest.assets.find((asset) => asset.name.endsWith(".msi"));
   const asset = exe ?? msi;
 
   if (!asset) return { url: SITE.github.releasesLatest, version: latest.tag_name };

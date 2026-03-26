@@ -34,8 +34,8 @@ const featureIcons: Record<ComparisonIcon, AstroComponentFactory> = {
   UserX,
 };
 
-function label(v: ComparisonValue): string {
-  return v === true ? "Sim" : v === false ? "Não" : "Parcial";
+function toComparisonLabel(value: ComparisonValue): string {
+  return value === true ? "Sim" : value === false ? "Não" : "Parcial";
 }
 ---
 
@@ -92,10 +92,10 @@ function label(v: ComparisonValue): string {
                     {row.feature}
                   </th>
                   {(["fialho", "ccleaner", "windows"] as const).map((col) => {
-                    const v = row[col];
+                    const cellValue = row[col];
                     return (
                       <td class:list={["cell", col === "fialho" && "cell--fialho"]}>
-                        {v === true && (
+                        {cellValue === true && (
                           <Check
                             class="icon icon--yes"
                             size={16}
@@ -103,10 +103,10 @@ function label(v: ComparisonValue): string {
                             aria-label="Sim"
                           />
                         )}
-                        {v === false && (
+                        {cellValue === false && (
                           <X class="icon icon--no" size={16} stroke-width={2.5} aria-label="Não" />
                         )}
-                        {v === "partial" && (
+                        {cellValue === "partial" && (
                           <Minus
                             class="icon icon--partial"
                             size={16}
@@ -114,7 +114,7 @@ function label(v: ComparisonValue): string {
                             aria-label="Parcial"
                           />
                         )}
-                        <span class="sr-only">{label(v)}</span>
+                        <span class="sr-only">{toComparisonLabel(cellValue)}</span>
                       </td>
                     );
                   })}

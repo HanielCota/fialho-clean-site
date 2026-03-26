@@ -60,12 +60,12 @@ import { SHOWCASE_TABS } from "@/constants/showcase";
 
   function activateTab(tab: HTMLButtonElement) {
     const id = tab.dataset.tab;
-    tabs.forEach((t) => {
-      t.classList.remove("active");
-      t.setAttribute("aria-selected", "false");
-      t.setAttribute("tabindex", "-1");
+    tabs.forEach((btn) => {
+      btn.classList.remove("active");
+      btn.setAttribute("aria-selected", "false");
+      btn.setAttribute("tabindex", "-1");
     });
-    panels.forEach((p) => p.classList.remove("active", "entering"));
+    panels.forEach((panel) => panel.classList.remove("active", "entering"));
     tab.classList.add("active");
     tab.setAttribute("aria-selected", "true");
     tab.setAttribute("tabindex", "0");
