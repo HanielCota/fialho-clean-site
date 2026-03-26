@@ -20,10 +20,10 @@ const SiteConfigSchema = z.object({
 });
 
 export const SITE = SiteConfigSchema.parse({
-  name: "FialhoClean",
+  name: "Fialho Optimizer",
   url: "https://fialho-clean.dev",
   description:
-    "FialhoClean remove bloatware, limpa registro e otimiza seu Windows. Gratuito, open source, sem telemetria.",
+    "Fialho Optimizer remove bloatware, limpa registro e otimiza seu Windows. Gratuito, open source, sem telemetria.",
   author: {
     name: "Haniel Fialho",
     github: "https://github.com/HanielCota",

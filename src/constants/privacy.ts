@@ -17,11 +17,11 @@ export const PRIVACY = PrivacySchema.parse({
     {
       title: "Resumo",
       paragraphs: [
-        "O FialhoClean não coleta, armazena ou transmite nenhum dado pessoal. Nem o aplicativo, nem este site.",
+        "O Fialho Optimizer não coleta, armazena ou transmite nenhum dado pessoal. Nem o aplicativo, nem este site.",
       ],
     },
     {
-      title: "O aplicativo FialhoClean",
+      title: "O aplicativo Fialho Optimizer",
       items: [
         "Roda 100% offline após o download",
         "Não faz conexões com servidores externos",

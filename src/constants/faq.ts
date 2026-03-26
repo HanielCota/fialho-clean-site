@@ -3,14 +3,14 @@ import { FaqItemSchema } from "@/types/faq";
 
 export const FAQS = z.array(FaqItemSchema).parse([
   {
-    question: "O FialhoClean é realmente gratuito?",
+    question: "O Fialho Optimizer é realmente gratuito?",
     answer:
       "Sim. Não tem versão paga, não tem funcionalidade bloqueada. O código tá aberto no GitHub, usa como quiser.",
   },
   {
     question: "É seguro usar? Posso danificar meu Windows?",
     answer:
-      "Você vê exatamente o que vai ser removido antes de confirmar qualquer coisa. O FialhoClean não mexe em arquivos críticos do sistema.",
+      "Você vê exatamente o que vai ser removido antes de confirmar qualquer coisa. O Fialho Optimizer não mexe em arquivos críticos do sistema.",
   },
   {
     question: "Precisa de instalação?",
@@ -26,7 +26,7 @@ export const FAQS = z.array(FaqItemSchema).parse([
     answer: "Abre uma issue, manda um PR ou dá uma estrela no repositório. Qualquer coisa ajuda.",
   },
   {
-    question: "O FialhoClean coleta algum dado?",
+    question: "O Fialho Optimizer coleta algum dado?",
     answer:
       "Nenhum. Sem telemetria, sem analytics, sem conexão com servidor nenhum. Tudo roda local na sua máquina.",
   },
@@ -38,6 +38,6 @@ export const FAQS = z.array(FaqItemSchema).parse([
   {
     question: "Como faço backup antes de limpar?",
     answer:
-      "O FialhoClean cria automaticamente um Ponto de Restauração do Sistema antes de qualquer operação destrutiva. Se algo der errado, você pode restaurar pelo Painel de Controle do Windows em menos de 5 minutos.",
+      "O Fialho Optimizer cria automaticamente um Ponto de Restauração do Sistema antes de qualquer operação destrutiva. Se algo der errado, você pode restaurar pelo Painel de Controle do Windows em menos de 5 minutos.",
   },
 ]);

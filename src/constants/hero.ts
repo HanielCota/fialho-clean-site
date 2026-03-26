@@ -5,7 +5,7 @@ import { SITE } from "@/config/site";
 export const HERO: HeroData = HeroSchema.parse({
   author: {
     name: SITE.author.name,
-    role: "Criador do FialhoClean",
+    role: "Criador do Fialho Optimizer",
     github: SITE.author.github,
   },
   authorNote:
