@@ -1,0 +1,230 @@
+---
+import Section from "@/components/ui/Section.astro";
+import { getReleases } from "@/services/github";
+import { formatDate, extractBullets } from "@/utils/format";
+import { SITE } from "@/config/site";
+
+const allReleases = await getReleases();
+const releases = allReleases.slice(0, 3);
+---
+
+<Section
+  id="changelog"
+  badge="Changelog"
+  title="Sempre evoluindo."
+  subtitle="Acompanhe o que foi adicionado, corrigido e melhorado em cada versão."
+>
+  {
+    releases.length > 0 ? (
+      <div class="releases">
+        {releases.map((release, i) => {
+          const bullets = extractBullets(release.body);
+          const date = formatDate(release.published_at);
+
+          return (
+            <div class:list={["release-card", { latest: i === 0 }]}>
+              <div class="release-header">
+                <div class="release-meta">
+                  <span class="version-badge">
+                    {release.tag_name}
+                    {i === 0 && <span class="latest-tag">Última</span>}
+                  </span>
+                  {date && <span class="release-date">Lançado em {date}</span>}
+                </div>
+                <a
+                  href={release.html_url}
+                  class="changelog-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Ver no GitHub →<span class="sr-only">(abre em nova aba)</span>
+                </a>
+              </div>
+
+              {bullets.length > 0 ? (
+                <ul class="bullets">
+                  {bullets.map((b) => (
+                    <li>{b}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p class="no-notes">Sem notas detalhadas. Veja o GitHub para mais informações.</p>
+              )}
+            </div>
+          );
+        })}
+
+        <div class="releases-footer">
+          <a
+            href={SITE.github.releasesLatest}
+            class="all-releases"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Ver todas as versões →<span class="sr-only">(abre em nova aba)</span>
+          </a>
+        </div>
+      </div>
+    ) : (
+      <div class="fallback">
+        <p>Acompanhe as atualizações diretamente no GitHub.</p>
+        <a
+          href={SITE.github.releasesLatest}
+          class="fallback-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Ver changelog no GitHub →<span class="sr-only">(abre em nova aba)</span>
+        </a>
+      </div>
+    )
+  }
+</Section>
+
+<style>
+  .releases {
+    max-width: 48rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .release-card {
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    background-color: var(--color-surface);
+    overflow: hidden;
+  }
+
+  .release-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 1.5rem 1.75rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .release-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .version-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.85rem;
+    background-color: color-mix(in oklch, var(--color-text) 10%, transparent);
+    border: 1px solid color-mix(in oklch, var(--color-text) 15%, transparent);
+    border-radius: 9999px;
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: -0.01em;
+  }
+
+  .latest-tag {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--color-success);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .release-date {
+    font-weight: 400;
+    color: var(--color-muted);
+  }
+
+  .changelog-link {
+    font-weight: 600;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color var(--duration-fast) ease;
+    white-space: nowrap;
+  }
+
+  .changelog-link:hover {
+    color: var(--color-text);
+  }
+
+  .bullets {
+    list-style: none;
+    margin: 0;
+    padding: 1.5rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+
+  .bullets li::before {
+    content: "–";
+    color: var(--color-muted);
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  .no-notes {
+    padding: 1.5rem 1.75rem;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .releases-footer {
+    text-align: center;
+    padding-top: 0.5rem;
+  }
+
+  .all-releases {
+    font-weight: 600;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color var(--duration-fast) ease;
+  }
+
+  .all-releases:hover {
+    color: var(--color-text);
+  }
+
+  .fallback {
+    max-width: 48rem;
+    margin: 0 auto;
+    text-align: center;
+    padding: 3rem;
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    background-color: var(--color-surface);
+  }
+
+  .fallback p {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    margin: 0 0 1rem;
+  }
+
+  .fallback-link {
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .fallback-link:hover {
+    opacity: 0.7;
+  }
+</style>

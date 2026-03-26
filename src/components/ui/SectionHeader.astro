@@ -1,0 +1,41 @@
+---
+interface Props {
+  badge: string;
+  title: string;
+  subtitle: string;
+}
+
+const { badge, title, subtitle } = Astro.props;
+---
+
+<div class="section-header">
+  <span class="badge">{badge}</span>
+  <h2 class="section-title">{title}</h2>
+  <p class="section-subtitle">{subtitle}</p>
+</div>
+
+<style>
+  .section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    margin: 0 0 1.25rem;
+  }
+
+  .section-subtitle {
+    font-size: clamp(1rem, 1.35vw, 1.15rem);
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--color-muted);
+    max-width: 48ch;
+    margin: 0 auto;
+  }
+</style>

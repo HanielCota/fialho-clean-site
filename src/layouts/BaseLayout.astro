@@ -1,0 +1,102 @@
+---
+import { SEO } from "astro-seo";
+import Font from "astro/components/Font.astro";
+import { SITE } from "@/config/site";
+import "@/styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage = "/og.png" } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+const ogImageURL = new URL(ogImage, Astro.site ?? Astro.url).toString();
+---
+
+<!doctype html>
+<html lang="pt-BR" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#141414" />
+
+    <SEO
+      title={title}
+      description={description}
+      canonical={canonicalURL.toString()}
+      openGraph={{
+        basic: {
+          type: "website",
+          title: title,
+          image: ogImageURL,
+          url: canonicalURL.toString(),
+        },
+        optional: {
+          locale: "pt_BR",
+          description: description,
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title: title,
+        description: description,
+        image: ogImageURL,
+      }}
+    />
+
+    <!-- Fonts via Astro Fonts API -->
+    <Font cssVariable="--font-outfit" preload />
+    <Font cssVariable="--font-jakarta" preload />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        name: SITE.name,
+        description: SITE.description,
+        url: SITE.url,
+        downloadUrl: SITE.github.releasesLatest,
+        operatingSystem: "Windows 10, Windows 11",
+        applicationCategory: "UtilitiesApplication",
+        offers: { "@type": "Offer", price: "0", priceCurrency: "BRL" },
+        license: `${SITE.github.repo}/blob/main/LICENSE`,
+        author: {
+          "@type": "Person",
+          name: SITE.author.name,
+          url: SITE.author.github,
+        },
+      }).replace(/</g, "\\u003c")}
+    />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Pular para o conteúdo</a>
+    <slot />
+    <script>
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.06 },
+      );
+      document.querySelectorAll("[data-animate]").forEach((el) => {
+        revealObserver.observe(el);
+      });
+    </script>
+  </body>
+</html>

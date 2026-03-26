@@ -1,0 +1,96 @@
+---
+import type { HTMLAttributes } from "astro:types";
+import type { AstroComponentFactory } from "astro/runtime/server/render/astro/factory.js";
+
+interface Props extends HTMLAttributes<"a" | "button"> {
+  variant?: "primary" | "secondary" | "ghost";
+  size?: "sm" | "md" | "lg";
+  href?: string;
+  icon?: AstroComponentFactory;
+}
+
+const { variant = "primary", size = "md", href, icon: Icon, ...attrs } = Astro.props;
+---
+
+{
+  href ? (
+    <a href={href} class:list={["btn", `btn-${variant}`, `btn-${size}`]} {...attrs}>
+      {Icon && <Icon size={16} />}
+      <slot />
+    </a>
+  ) : (
+    <button class:list={["btn", `btn-${variant}`, `btn-${size}`]} {...attrs}>
+      {Icon && <Icon size={16} />}
+      <slot />
+    </button>
+  )
+}
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all var(--duration-fast) ease;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn:active {
+    transform: translateY(0);
+  }
+
+  .btn-primary {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-accent-dim);
+  }
+
+  .btn-secondary {
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    background-color: rgba(255, 255, 255, 0.04);
+  }
+
+  .btn-secondary:hover {
+    border-color: color-mix(in oklch, var(--color-border) 40%, white 60%);
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-muted);
+  }
+
+  .btn-ghost:hover {
+    color: var(--color-text);
+    background-color: color-mix(in oklch, var(--color-text) 8%, transparent);
+  }
+
+  .btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: var(--text-xs);
+  }
+
+  .btn-md {
+    padding: 0.8rem 1.6rem;
+    font-size: var(--text-sm);
+  }
+
+  .btn-lg {
+    padding: 1rem 2rem;
+    font-size: var(--text-base);
+  }
+</style>

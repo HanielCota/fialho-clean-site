@@ -1,0 +1,68 @@
+---
+import Section from "@/components/ui/Section.astro";
+import Card from "@/components/ui/Card.astro";
+import { ShieldCheck, SquareCode, WifiOff, Eye } from "@lucide/astro";
+import { SITE } from "@/config/site";
+
+const PILLARS = [
+  {
+    icon: ShieldCheck,
+    title: "Verificado no VirusTotal",
+    description:
+      "Nenhum antivírus entre os 70+ da plataforma detecta ameaça. Verifique você mesmo antes de baixar.",
+    link: { label: "Verificar agora →", href: SITE.virustotal },
+  },
+  {
+    icon: SquareCode,
+    title: "100% Código Aberto",
+    description:
+      "Todo o código está no GitHub. Qualquer pessoa pode ler, auditar ou contribuir. Sem caixa preta.",
+    link: { label: "Ver no GitHub →", href: SITE.github.repo },
+  },
+  {
+    icon: WifiOff,
+    title: "Offline Total",
+    description:
+      "O FialhoClean nunca faz conexão com servidores externos. Funciona sem internet após o download.",
+  },
+  {
+    icon: Eye,
+    title: "Auditável por Qualquer Um",
+    description:
+      "Sem binários opacos. Sem dependências ofuscadas. O que você vê no código é o que roda na sua máquina.",
+  },
+];
+---
+
+<Section
+  id="seguranca"
+  badge="Segurança"
+  title="Transparência total."
+  subtitle="Num mundo cheio de apps com telemetria escondida, o FialhoClean funciona de forma diferente."
+>
+  <div class="pillars-grid">
+    {
+      PILLARS.map((p) => (
+        <Card title={p.title} description={p.description} icon={p.icon} link={p.link} />
+      ))
+    }
+  </div>
+</Section>
+
+<style>
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  @media (min-width: 640px) {
+    .pillars-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .pillars-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

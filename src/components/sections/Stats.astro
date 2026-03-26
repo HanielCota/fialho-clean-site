@@ -1,0 +1,156 @@
+---
+import { getRepoStats, getReleases, sumDownloads } from "@/services/github";
+import { formatNumber } from "@/utils/format";
+
+const [repo, releases] = await Promise.all([getRepoStats(), getReleases()]);
+
+const stars = repo?.stargazers_count ?? null;
+const downloads = releases.length > 0 ? sumDownloads(releases) : null;
+
+interface StatDisplay {
+  value: string;
+  label: string;
+  accent?: boolean;
+}
+
+const stats: StatDisplay[] = [
+  stars !== null
+    ? { value: formatNumber(stars), label: "GitHub stars" }
+    : { value: "Portátil", label: "sem instalação" },
+  downloads !== null && downloads > 0
+    ? { value: `${formatNumber(downloads)}+`, label: "downloads" }
+    : { value: "< 2s", label: "tempo de scan" },
+  { value: "0 KB", label: "de telemetria", accent: true },
+  { value: "100%", label: "open source", accent: true },
+];
+---
+
+<div class="stats-bar" aria-label="Estatísticas do FialhoClean">
+  {
+    stats.map((s, i) => (
+      <>
+        {i > 0 && <div class="divider" aria-hidden="true" />}
+        <div class="stat">
+          <span
+            class:list={["stat-value", { accent: s.accent }]}
+            data-stat-target={s.value}
+            aria-label={`${s.value} ${s.label}`}
+          >
+            {s.value}
+          </span>
+          <span class="stat-label" aria-hidden="true">
+            {s.label}
+          </span>
+        </div>
+      </>
+    ))
+  }
+</div>
+
+<style>
+  .stats-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    background-color: color-mix(in oklch, var(--color-surface) 70%, transparent);
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 1.5rem 2.5rem;
+  }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .stat-value.accent {
+    color: var(--color-accent);
+  }
+
+  .stat-label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .divider {
+    width: 1px;
+    height: 3rem;
+    background-color: var(--color-border);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 480px) {
+    .stat {
+      padding: 1.25rem 1.5rem;
+    }
+    .stat-value {
+      font-size: 1.4rem;
+    }
+    .divider:nth-of-type(3) {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  function animateStat(el: HTMLElement) {
+    const raw = el.dataset.statTarget;
+    if (!raw) return;
+
+    const match = raw.match(/^(\d+(?:\.\d+)?)(.*)/);
+    if (!match) {
+      el.textContent = raw;
+      return;
+    }
+
+    const target = parseFloat(match[1]);
+    const suffix = match[2];
+    const isDecimal = match[1].includes(".");
+    const COUNTER_DURATION_MS = 900;
+    const startTime = performance.now();
+
+    function tick(now: number) {
+      const p = Math.min((now - startTime) / COUNTER_DURATION_MS, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const current = target * eased;
+      const formatted = isDecimal
+        ? (Math.round(current * 10) / 10).toFixed(1)
+        : String(Math.round(current));
+      el.textContent = formatted + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = raw;
+    }
+
+    el.textContent = (isDecimal ? "0.0" : "0") + suffix;
+    requestAnimationFrame(tick);
+  }
+
+  const statsBar = document.querySelector(".stats-bar");
+  if (statsBar) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          observer.unobserve(entry.target);
+          entry.target.querySelectorAll<HTMLElement>("[data-stat-target]").forEach(animateStat);
+        });
+      },
+      { threshold: 0.5 }, // 50% visible before triggering counter animation
+    );
+    observer.observe(statsBar);
+  }
+</script>

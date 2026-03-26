@@ -1,0 +1,356 @@
+---
+import { Zap, X } from "@lucide/astro";
+import BrandIcon from "@/components/ui/BrandIcon.astro";
+import MobileMenu from "@/components/layout/MobileMenu.astro";
+import { siGithub } from "simple-icons";
+import { NAV_LINKS } from "@/constants/navigation";
+import { SITE } from "@/config/site";
+---
+
+<header id="navbar">
+  <nav class="nav-pill" aria-label="Navegação principal">
+    <!-- Logo -->
+    <a href="/" class="nav-logo" aria-label="FialhoClean - Página inicial">
+      <Zap size={18} stroke-width={2.5} />
+      <span class="logo-text">FialhoClean</span>
+    </a>
+
+    <div class="nav-separator" aria-hidden="true"></div>
+
+    <!-- Links (desktop) -->
+    <ul class="nav-links" role="list">
+      {
+        NAV_LINKS.map((link) => (
+          <li>
+            <a href={link.href} class="nav-link">
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Actions -->
+    <div class="nav-actions">
+      <a
+        href={SITE.github.repo}
+        class="nav-github"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Ver no GitHub (abre em nova aba)"
+      >
+        <BrandIcon path={siGithub.path} size={18} />
+      </a>
+      <a href="#download" class="nav-cta">Baixar grátis</a>
+    </div>
+
+    <!-- Hamburger (mobile) -->
+    <button class="nav-toggle" aria-expanded="false" aria-label="Abrir menu" data-menu-toggle>
+      <span class="hamburger-container">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </span>
+      <span class="close-icon">
+        <X size={20} stroke-width={2} />
+      </span>
+    </button>
+  </nav>
+
+  <MobileMenu />
+</header>
+
+<style>
+  #navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 1rem 0;
+    pointer-events: none;
+  }
+
+  .nav-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 56rem;
+    padding: 0.5rem 0.5rem 0.5rem 1.25rem;
+    border-radius: 9999px;
+    border: 1px solid color-mix(in oklch, var(--color-border) 80%, white 8%);
+    backdrop-filter: blur(20px) saturate(1.8);
+    -webkit-backdrop-filter: blur(20px) saturate(1.8);
+    background-color: color-mix(in oklch, var(--color-bg) 70%, transparent);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.3),
+      0 8px 32px -8px rgba(0, 0, 0, 0.4);
+    pointer-events: auto;
+    transition:
+      border-color var(--duration-normal) ease,
+      box-shadow var(--duration-normal) ease,
+      background-color var(--duration-normal) ease;
+  }
+
+  #navbar.scrolled .nav-pill {
+    border-color: color-mix(in oklch, var(--color-border) 100%, white 14%);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.4),
+      0 16px 48px -8px rgba(0, 0, 0, 0.6);
+    background-color: color-mix(in oklch, var(--color-bg) 88%, transparent);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .nav-logo:hover {
+    opacity: 0.75;
+  }
+
+  .logo-text {
+    white-space: nowrap;
+  }
+
+  .nav-separator {
+    display: none;
+    width: 1px;
+    height: 1.25rem;
+    background-color: var(--color-border);
+    margin: 0 0.5rem;
+    flex-shrink: 0;
+  }
+  @media (min-width: 768px) {
+    .nav-separator {
+      display: block;
+    }
+  }
+
+  .nav-links {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.25rem;
+    flex: 1;
+  }
+  @media (min-width: 768px) {
+    .nav-links {
+      display: flex;
+    }
+  }
+
+  .nav-link {
+    font-weight: 500;
+    color: var(--color-muted);
+    text-decoration: none;
+    padding: 0.4rem 0.75rem;
+    border-radius: 9999px;
+    transition:
+      color var(--duration-fast) ease,
+      background-color var(--duration-fast) ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-text);
+    background-color: color-mix(in oklch, var(--color-text) 8%, transparent);
+  }
+
+  .nav-actions {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+  }
+  @media (min-width: 768px) {
+    .nav-actions {
+      display: flex;
+    }
+  }
+
+  .nav-github {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    color: var(--color-muted);
+    transition:
+      color var(--duration-fast) ease,
+      background-color var(--duration-fast) ease;
+  }
+
+  .nav-github:hover {
+    color: var(--color-text);
+    background-color: color-mix(in oklch, var(--color-text) 8%, transparent);
+  }
+
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 1.15rem;
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    font-weight: 600;
+    border-radius: 9999px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background-color var(--duration-fast) ease,
+      transform var(--duration-fast) ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nav-cta::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.22) 50%,
+      transparent 100%
+    );
+    transform: translateX(-110%);
+    transition: transform 480ms ease;
+    pointer-events: none;
+  }
+
+  .nav-cta:hover::after {
+    transform: translateX(110%);
+  }
+
+  .nav-cta:hover {
+    background-color: var(--color-accent-dim);
+    transform: scale(1.03);
+  }
+
+  .nav-cta:active {
+    transform: scale(0.98);
+  }
+
+  /* Toggle button */
+  .nav-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: auto;
+    border-radius: 50%;
+    transition: background-color var(--duration-fast) ease;
+    color: var(--color-text);
+  }
+
+  .nav-toggle:hover {
+    background-color: color-mix(in oklch, var(--color-text) 8%, transparent);
+  }
+  @media (min-width: 768px) {
+    .nav-toggle {
+      display: none;
+    }
+  }
+
+  .nav-toggle .close-icon {
+    display: none;
+  }
+  .nav-toggle[aria-expanded="true"] .hamburger-container {
+    display: none;
+  }
+  .nav-toggle[aria-expanded="true"] .close-icon {
+    display: flex;
+  }
+
+  .hamburger-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 1.25rem;
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background-color: var(--color-text);
+    border-radius: 2px;
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const menu = document.querySelector<HTMLElement>("[data-mobile-menu]");
+
+  function onEscape(e: KeyboardEvent) {
+    if (e.key === "Escape") closeMenu();
+  }
+
+  function closeMenu() {
+    menu?.classList.remove("is-open");
+    toggle?.setAttribute("aria-expanded", "false");
+    toggle?.setAttribute("aria-label", "Abrir menu");
+    document.removeEventListener("keydown", onEscape);
+    toggle?.focus();
+  }
+
+  if (toggle && menu) {
+    toggle.addEventListener("click", () => {
+      const isOpen = menu.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      toggle.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
+
+      if (isOpen) {
+        document.addEventListener("keydown", onEscape);
+        const firstLink = menu.querySelector<HTMLElement>("a");
+        firstLink?.focus();
+      } else {
+        document.removeEventListener("keydown", onEscape);
+      }
+    });
+
+    menu.querySelectorAll("[data-menu-close]").forEach((link) => {
+      link.addEventListener("click", () => closeMenu());
+    });
+  }
+
+  const SCROLL_THRESHOLD = 60;
+  const navbar = document.getElementById("navbar");
+  if (navbar) {
+    let ticking = false;
+    const update = () => {
+      navbar.classList.toggle("scrolled", window.scrollY > SCROLL_THRESHOLD);
+      ticking = false;
+    };
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          requestAnimationFrame(update);
+          ticking = true;
+        }
+      },
+      { passive: true },
+    );
+  }
+</script>

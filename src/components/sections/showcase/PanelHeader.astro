@@ -1,0 +1,58 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+
+<div class="panel-head">
+  <div>
+    <h3 class="panel-title">{title}</h3>
+    <p class="panel-desc">{description}</p>
+  </div>
+  {
+    Astro.slots.has("actions") && (
+      <div class="panel-actions">
+        <slot name="actions" />
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .panel-title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .panel-desc {
+    font-size: var(--text-sm);
+    color: var(--color-muted-dim);
+    margin: 0.2rem 0 0;
+    line-height: 1.5;
+  }
+
+  .panel-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .panel-actions {
+      display: none;
+    }
+  }
+</style>

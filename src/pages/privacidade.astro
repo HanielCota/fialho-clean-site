@@ -1,0 +1,125 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Navbar from "@/components/layout/Navbar.astro";
+import Footer from "@/components/layout/Footer.astro";
+import { PRIVACY } from "@/constants/privacy";
+---
+
+<BaseLayout
+  title="Política de Privacidade — FialhoClean"
+  description="O FialhoClean não coleta dados pessoais. Veja nossa política de privacidade."
+>
+  <Navbar />
+  <main id="main" class="privacy-page page-padding">
+    <article class="privacy-content">
+      <h1 class="privacy-title">Política de Privacidade</h1>
+      <p class="privacy-updated">Última atualização: {PRIVACY.lastUpdated}</p>
+
+      {
+        PRIVACY.sections.map((section) => (
+          <section>
+            <h2>{section.title}</h2>
+
+            {section.paragraphs?.map((p) => (
+              <p>{p}</p>
+            ))}
+
+            {section.items && (
+              <ul>
+                {section.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            )}
+          </section>
+        ))
+      }
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .privacy-page {
+    padding-block: 10rem 6rem;
+  }
+
+  .privacy-content {
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  .privacy-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: var(--color-text);
+    margin: 0 0 0.5rem;
+  }
+
+  .privacy-updated {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    margin: 0 0 3rem;
+  }
+
+  .privacy-content section {
+    margin-bottom: 2.5rem;
+  }
+
+  .privacy-content h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+    margin: 0 0 1rem;
+  }
+
+  .privacy-content p {
+    line-height: 1.8;
+    color: var(--color-muted);
+    margin: 0 0 1rem;
+  }
+
+  .privacy-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .privacy-content li {
+    line-height: 1.7;
+    color: var(--color-muted);
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .privacy-content li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: var(--color-border);
+  }
+
+  .privacy-content a {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .privacy-content a:hover {
+    opacity: 0.7;
+  }
+
+  .privacy-content strong {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+</style>

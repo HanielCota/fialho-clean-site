@@ -1,0 +1,150 @@
+---
+import { Home, Trash2, Zap, LayoutGrid, Wrench, Settings } from "@lucide/astro";
+import type { ShowcasePanelId } from "@/types/showcase";
+
+interface Props {
+  activeItem: ShowcasePanelId;
+}
+
+const { activeItem } = Astro.props;
+
+const navItems = [
+  { id: "inicio", label: "Início", Icon: Home },
+  { id: "limpeza", label: "Limpeza", Icon: Trash2 },
+  { id: "velocidade", label: "Velocidade", Icon: Zap },
+  { id: "apps", label: "Apps", Icon: LayoutGrid },
+  { id: "consertar", label: "Consertar", Icon: Wrench },
+] as const;
+---
+
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+        ><path
+          d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path></svg
+      >
+    </div>
+    <span class="brand-name">FialhoClean</span>
+  </div>
+  <nav class="sidebar-nav">
+    <span class="nav-group-label">Navegação</span>
+    {
+      navItems.map(({ id, label, Icon }) => (
+        <button class:list={["nav-item", { active: id === activeItem }]}>
+          <Icon size={18} stroke-width={1.5} />
+          <span>{label}</span>
+        </button>
+      ))
+    }
+  </nav>
+  <div class="sidebar-bottom">
+    <button class="nav-item">
+      <Settings size={18} stroke-width={1.5} />
+      <span>Configurações</span>
+    </button>
+  </div>
+</aside>
+
+<style>
+  .sidebar {
+    width: 190px;
+    min-width: 190px;
+    background: linear-gradient(
+      180deg,
+      var(--color-surface-deep) 0%,
+      var(--color-surface-deep) 100%
+    );
+    border-right: 1px solid var(--color-border-subtle);
+    padding: 1.25rem 0.65rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0 0.45rem;
+  }
+  .brand-icon {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #1e1e1e 0%, #161616 100%);
+    border: 1px solid #2a2a2a;
+    color: var(--color-muted);
+  }
+  .brand-name {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+  }
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    flex: 1;
+  }
+  .nav-group-label {
+    font-size: var(--text-2xs);
+    font-weight: 700;
+    color: var(--color-muted-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 0.6rem;
+    border-radius: 8px;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-muted-dim);
+    cursor: default;
+    position: relative;
+    transition: all var(--duration-fast) ease;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+  }
+  .nav-item.active {
+    color: var(--color-text);
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  .nav-item.active::before {
+    content: "";
+    position: absolute;
+    left: -0.65rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 16px;
+    border-radius: 0 3px 3px 0;
+    background-color: var(--color-text);
+  }
+  .sidebar-bottom {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  @media (max-width: 768px) {
+    .sidebar {
+      display: none;
+    }
+  }
+</style>

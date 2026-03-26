@@ -1,0 +1,135 @@
+---
+import BrandIcon from "@/components/ui/BrandIcon.astro";
+import { siGithub } from "simple-icons";
+import { NAV_LINKS } from "@/constants/navigation";
+import { SITE } from "@/config/site";
+---
+
+<div class="mobile-menu" data-mobile-menu>
+  <ul class="mobile-links" role="list">
+    {
+      NAV_LINKS.map((link) => (
+        <li>
+          <a href={link.href} class="mobile-link" data-menu-close>
+            {link.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="mobile-actions">
+    <a href={SITE.github.repo} class="mobile-github" target="_blank" rel="noopener noreferrer">
+      <BrandIcon path={siGithub.path} size={18} />
+      <span>GitHub</span>
+      <span class="sr-only">(abre em nova aba)</span>
+    </a>
+    <a href="#download" class="mobile-cta" data-menu-close>Baixar grátis</a>
+  </div>
+</div>
+
+<style>
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    max-width: 56rem;
+    margin-top: 0.5rem;
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+    border: 1px solid color-mix(in oklch, var(--color-border) 80%, white 8%);
+    backdrop-filter: blur(20px) saturate(1.8);
+    -webkit-backdrop-filter: blur(20px) saturate(1.8);
+    background-color: color-mix(in oklch, var(--color-bg) 85%, transparent);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.3),
+      0 8px 32px -8px rgba(0, 0, 0, 0.4);
+    pointer-events: auto;
+    opacity: 0;
+    transform: scale(0.95);
+    transition:
+      opacity var(--duration-fast) ease-out,
+      transform var(--duration-fast) ease-out;
+  }
+
+  .mobile-menu.is-open {
+    display: flex;
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  @media (min-width: 768px) {
+    .mobile-menu {
+      display: none !important;
+    }
+  }
+
+  .mobile-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .mobile-link {
+    display: block;
+    padding: 0.7rem 1rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    text-decoration: none;
+    border-radius: 0.75rem;
+    transition:
+      color var(--duration-fast) ease,
+      background-color var(--duration-fast) ease;
+  }
+
+  .mobile-link:hover {
+    color: var(--color-text);
+    background-color: color-mix(in oklch, var(--color-text) 6%, transparent);
+  }
+
+  .mobile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .mobile-github {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    color: var(--color-text);
+    font-weight: 500;
+    text-decoration: none;
+    transition: border-color var(--duration-fast) ease;
+  }
+
+  .mobile-github:hover {
+    border-color: var(--color-muted);
+  }
+
+  .mobile-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1rem;
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    font-weight: 600;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    transition: background-color var(--duration-fast) ease;
+  }
+
+  .mobile-cta:hover {
+    background-color: var(--color-accent-dim);
+  }
+</style>

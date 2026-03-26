@@ -1,0 +1,96 @@
+---
+import MockButton from "@/components/sections/showcase/MockButton.astro";
+---
+
+<div class="status-banner">
+  <div class="status-glow"></div>
+  <div class="status-dot-wrap">
+    <span class="status-pulse"></span>
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+      ><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" opacity="0.3"></circle><path
+        d="M8 12l3 3 5-5"
+        stroke="#22c55e"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path></svg
+    >
+  </div>
+  <div class="status-info">
+    <strong class="status-title">Em Boa Forma</strong>
+    <span class="status-sub">Nenhum problema encontrado no último scan</span>
+  </div>
+  <MockButton variant="primary">Limpeza Rápida</MockButton>
+</div>
+
+<style>
+  .status-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.85rem 1.15rem;
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--color-success) 6%, transparent) 0%,
+      color-mix(in oklch, var(--color-success) 2%, transparent) 100%
+    );
+    border: 1px solid color-mix(in oklch, var(--color-success) 12%, transparent);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .status-glow {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(
+      circle,
+      color-mix(in oklch, var(--color-success) 15%, transparent) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+  .status-dot-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+  .status-pulse {
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1.5px solid color-mix(in oklch, var(--color-success) 30%, transparent);
+    animation: pulse-ring 2s ease-out infinite;
+  }
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .status-pulse {
+      animation: none;
+      opacity: 0;
+    }
+  }
+  .status-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .status-title {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-success);
+  }
+  .status-sub {
+    font-size: var(--text-xs);
+    color: var(--color-muted-dim);
+  }
+</style>

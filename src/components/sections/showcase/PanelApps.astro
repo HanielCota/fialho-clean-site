@@ -1,0 +1,234 @@
+---
+import PanelHeader from "@/components/sections/showcase/PanelHeader.astro";
+import MockButton from "@/components/sections/showcase/MockButton.astro";
+---
+
+<PanelHeader
+  title="Apps Desnecessários"
+  description="Programas que vieram pré-instalados e que provavelmente você nunca vai usar"
+/>
+<div class="search-bar">
+  <svg width="15" height="15" viewBox="0 0 16 16" fill="none"
+    ><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"></circle><path
+      d="M11 11l3.5 3.5"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"></path></svg
+  >
+  <span>Buscar por nome ou descrição...</span>
+</div>
+<div class="filter-row">
+  <button class="filter mock-active">Todos</button>
+  <button class="filter">Seguros</button>
+  <button class="filter">Atenção</button>
+  <span class="filter-meta">3 de 3 apps</span>
+</div>
+<div class="apps-section-head">
+  <span class="apps-section-label">Apps instalados</span>
+  <MockButton variant="ghost" size="sm">Selecionar todos</MockButton>
+</div>
+<div class="app-category-label">Entretenimento e Jogos — 1</div>
+<div class="app-row">
+  <span class="ck"></span>
+  <div class="app-icon-wrap">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+      ><path
+        d="M6 11h4v4H6zm8-4h4v4h-4z"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path><rect
+        x="2"
+        y="4"
+        width="20"
+        height="16"
+        rx="3"
+        stroke="currentColor"
+        stroke-width="1.5"></rect></svg
+    >
+  </div>
+  <div class="app-meta">
+    <div class="app-name-line">
+      <strong>Xbox (Gaming App)</strong>
+      <span class="tag tag--warn">Cuidado</span>
+    </div>
+    <small>Xbox Game Pass, game library e social features.</small>
+  </div>
+</div>
+<div class="app-category-label">Comunicação — 2</div>
+<div class="app-row">
+  <span class="ck"></span>
+  <div class="app-icon-wrap">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+      ><path
+        d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path></svg
+    >
+  </div>
+  <div class="app-meta">
+    <div class="app-name-line">
+      <strong>Microsoft Teams</strong>
+      <span class="tag tag--safe">Seguro</span>
+    </div>
+    <small>Comunicação e videochamadas corporativa.</small>
+  </div>
+</div>
+<div class="app-row">
+  <span class="ck"></span>
+  <div class="app-icon-wrap">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+      ><path
+        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+        stroke="currentColor"
+        stroke-width="1.5"></path><path
+        d="M22 6l-10 7L2 6"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path></svg
+    >
+  </div>
+  <div class="app-meta">
+    <div class="app-name-line">
+      <strong>Mail and Calendar</strong>
+      <span class="tag tag--safe">Seguro</span>
+    </div>
+    <small>Cliente de e-mail e calendário nativo do Windows.</small>
+  </div>
+</div>
+
+<style>
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.6rem 0.8rem;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid #1e1e1e;
+    border-radius: 8px;
+    color: var(--color-muted-dim);
+    font-size: var(--text-sm);
+  }
+
+  .filter-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .filter {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    padding: 0.35rem 0.8rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-border-mid);
+    background: transparent;
+    color: var(--color-muted-dim);
+    cursor: default;
+  }
+  .filter-meta {
+    font-size: var(--text-xs);
+    color: var(--color-muted-dim);
+    margin-left: auto;
+  }
+
+  .apps-section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .apps-section-label {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--color-muted-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .app-category-label {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding-top: 0.3rem;
+  }
+
+  .app-row {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.6rem 0.7rem;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 8px;
+    transition: border-color var(--duration-fast);
+  }
+  .app-row:hover {
+    border-color: var(--color-border-mid);
+  }
+
+  .ck {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 1.5px solid var(--color-border);
+    flex-shrink: 0;
+  }
+
+  .app-icon-wrap {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1e1e1e, #181818);
+    border: 1px solid var(--color-border-mid);
+    border-radius: 7px;
+    color: #9a9a9a;
+    flex-shrink: 0;
+  }
+
+  .app-meta {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .app-name-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .app-name-line strong {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+  .app-meta small {
+    font-size: var(--text-xs);
+    color: var(--color-muted-dim);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .tag {
+    font-size: var(--text-2xs);
+    font-weight: 700;
+    padding: 0.12rem 0.4rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .tag--warn {
+    background-color: color-mix(in oklch, var(--color-warning) 12%, transparent);
+    color: var(--color-warning);
+  }
+  .tag--safe {
+    background-color: color-mix(in oklch, var(--color-success) 10%, transparent);
+    color: var(--color-success);
+  }
+</style>

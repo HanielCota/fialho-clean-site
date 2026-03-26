@@ -1,0 +1,246 @@
+---
+import PanelHeader from "@/components/sections/showcase/PanelHeader.astro";
+import MockButton from "@/components/sections/showcase/MockButton.astro";
+---
+
+<PanelHeader
+  title="Limpar seu PC"
+  description="Selecione as categorias de arquivos que você quer limpar"
+>
+  <Fragment slot="actions">
+    <MockButton variant="ghost">Limpeza Rápida</MockButton>
+    <MockButton variant="ghost">Passeio Rápido</MockButton>
+  </Fragment>
+</PanelHeader>
+<div class="cleanup-list">
+  <label class="cleanup-row">
+    <span class="ck ck--on"></span>
+    <span class="ck-icon ck-icon--file"
+      ><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+        ><path
+          d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path><path
+          d="M14 2v6h6"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path></svg
+      ></span
+    >
+    <span class="ck-text"
+      ><strong>Arquivos Temporários</strong><small>Limpa as pastas temporárias do Windows</small
+      ></span
+    >
+    <span class="ck-size">2.3 GB</span>
+  </label>
+  <label class="cleanup-row">
+    <span class="ck ck--on"></span>
+    <span class="ck-icon ck-icon--web"
+      ><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+        ><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"></circle><path
+          d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"
+          stroke="currentColor"
+          stroke-width="1.5"></path></svg
+      ></span
+    >
+    <span class="ck-text"
+      ><strong>Cache do Navegador</strong><small>Dados em cache de todos os navegadores</small
+      ></span
+    >
+    <span class="ck-size">1.8 GB</span>
+  </label>
+  <label class="cleanup-row">
+    <span class="ck"></span>
+    <span class="ck-icon"
+      ><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+        ><path
+          d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path></svg
+      ></span
+    >
+    <span class="ck-text"
+      ><strong>Lixeira</strong><small>Arquivos na lixeira do Windows</small></span
+    >
+    <span class="ck-size">890 MB</span>
+  </label>
+  <label class="cleanup-row">
+    <span class="ck ck--on"></span>
+    <span class="ck-icon"
+      ><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+        ><path
+          d="M4 19.5A2.5 2.5 0 016.5 17H20"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path><path
+          d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path></svg
+      ></span
+    >
+    <span class="ck-text"
+      ><strong>Logs Antigos</strong><small>Logs que podem ser removidos com segurança</small></span
+    >
+    <span class="ck-size">340 MB</span>
+  </label>
+  <label class="cleanup-row">
+    <span class="ck"></span>
+    <span class="ck-icon"
+      ><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+        ><path
+          d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path></svg
+      ></span
+    >
+    <span class="ck-text"
+      ><strong>Cache do Windows Update</strong><small>Cache de atualizações já instaladas</small
+      ></span
+    >
+    <span class="ck-size">1.1 GB</span>
+  </label>
+  <label class="cleanup-row">
+    <span class="ck ck--on"></span>
+    <span class="ck-icon"
+      ><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+        ><path
+          d="M12 20V10M18 20V4M6 20v-4"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path></svg
+      ></span
+    >
+    <span class="ck-text"
+      ><strong>Otimização do Sistema</strong><small>Dados redundantes e fragmentos</small></span
+    >
+    <span class="ck-size">560 MB</span>
+  </label>
+</div>
+<div class="cleanup-footer">
+  <span class="cleanup-total">Total selecionado: <strong>5.0 GB</strong></span>
+  <MockButton variant="primary">Iniciar Limpeza</MockButton>
+</div>
+
+<style>
+  .cleanup-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+    overflow: hidden;
+  }
+  .cleanup-row {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.6rem 0.75rem;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: default;
+    transition: all var(--duration-fast);
+  }
+  .cleanup-row:hover {
+    background-color: rgba(255, 255, 255, 0.035);
+    border-color: #1e1e1e;
+  }
+
+  .ck {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 1.5px solid var(--color-border);
+    flex-shrink: 0;
+    position: relative;
+    transition: all var(--duration-fast);
+  }
+  .ck--on {
+    background-color: var(--color-text);
+    border-color: var(--color-text);
+  }
+  .ck--on::after {
+    content: "";
+    position: absolute;
+    top: 1.5px;
+    left: 5px;
+    width: 5px;
+    height: 8px;
+    border: solid var(--color-surface-deep);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .ck-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background-color: #181818;
+    border: 1px solid var(--color-border-mid);
+    color: var(--color-muted-dim);
+    flex-shrink: 0;
+  }
+  .ck-icon--file {
+    color: var(--color-info);
+  }
+  .ck-icon--web {
+    color: #a855f7;
+  }
+
+  .ck-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .ck-text strong {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+  .ck-text small {
+    font-size: var(--text-xs);
+    color: var(--color-muted-dim);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ck-size {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-muted-dim);
+    flex-shrink: 0;
+    padding: 0.15rem 0.45rem;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+  }
+
+  .cleanup-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--color-border-subtle);
+  }
+  .cleanup-total {
+    font-size: var(--text-sm);
+    color: var(--color-muted-dim);
+  }
+  .cleanup-total strong {
+    color: var(--color-text);
+  }
+</style>

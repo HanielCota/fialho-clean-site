@@ -1,0 +1,133 @@
+---
+import { Download as DownloadIcon } from "@lucide/astro";
+import IconGitHub from "@/components/ui/IconGitHub.astro";
+import Button from "@/components/ui/Button.astro";
+import { SITE } from "@/config/site";
+---
+
+<section id="download" class="page-padding">
+  <div class="page-container">
+    <div class="cta-content">
+      <h2 class="cta-title">Pronto para limpar<br />seu Windows?</h2>
+      <p class="cta-subtitle">Sem cadastro, sem instalação. Baixa o .exe e roda. Leva segundos.</p>
+      <div class="cta-buttons">
+        <Button
+          href={SITE.github.releasesLatest}
+          variant="primary"
+          size="lg"
+          icon={DownloadIcon}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Baixar FialhoClean
+        </Button>
+        <Button
+          href={SITE.github.repo}
+          variant="secondary"
+          size="lg"
+          icon={IconGitHub}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Ver no GitHub
+        </Button>
+      </div>
+
+      <ul class="requirements" aria-label="Requisitos do sistema">
+        <li>Windows 10 / 11</li>
+        <li>64-bit</li>
+        <li>~10 MB</li>
+        <li>Sem instalação</li>
+        <li>Sem internet</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  #download {
+    position: relative;
+    padding-block: 8rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .cta-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+    padding: 4rem 2rem;
+    border: 1px solid var(--color-border);
+    border-radius: 1.5rem;
+    background-color: var(--color-surface);
+  }
+
+  .cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .cta-subtitle {
+    font-size: clamp(1rem, 1.35vw, 1.15rem);
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--color-muted);
+    max-width: 42ch;
+    margin: 0;
+  }
+
+  .cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  @keyframes btn-glow {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+    50% {
+      box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.07);
+    }
+  }
+
+  .cta-buttons :global(.btn-primary) {
+    animation: btn-glow 3s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-buttons :global(.btn-primary) {
+      animation: none;
+    }
+  }
+
+  .requirements {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .requirements li {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-muted);
+    opacity: 0.7;
+  }
+  .requirements li + li::before {
+    content: "·";
+    margin-right: 0.4rem;
+    opacity: 0.4;
+  }
+</style>

@@ -1,0 +1,183 @@
+---
+import { HERO } from "@/constants/hero";
+import { Download, Lightbulb } from "@lucide/astro";
+import IconGitHub from "@/components/ui/IconGitHub.astro";
+import Button from "@/components/ui/Button.astro";
+import { getImage } from "astro:assets";
+import heroSrc from "@/assets/images/hero2.jpeg";
+
+const optimizedHero = await getImage({ src: heroSrc, format: "webp", quality: 80, width: 1920 });
+const heroBgUrl = `url(${optimizedHero.src})`;
+
+const { badge, headline, subheadline, authorNote, cta } = HERO;
+---
+
+<section id="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="badge">{badge}</span>
+
+      <h1 class="headline">
+        <span>{headline.top}</span>
+        <span class="headline-accent">{headline.accent}</span>
+        <span>{headline.bottom}</span>
+      </h1>
+
+      <p class="subheadline">{subheadline}</p>
+
+      {
+        authorNote && (
+          <div class="author-note">
+            <span class="note-icon">
+              <Lightbulb size={15} stroke-width={2} />
+            </span>
+            <span>{authorNote}</span>
+          </div>
+        )
+      }
+
+      <div class="cta-group">
+        <Button href={cta.primary.href} variant="primary" size="md" icon={Download}>
+          {cta.primary.label}
+        </Button>
+        <Button
+          href={cta.secondary.href}
+          variant="secondary"
+          size="md"
+          icon={IconGitHub}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {cta.secondary.label}
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style define:vars={{ heroBgUrl }}>
+  #hero {
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    align-items: center;
+    padding: 9rem 1.5rem 5rem;
+    overflow: hidden;
+  }
+  @media (min-width: 640px) {
+    #hero {
+      padding: 10rem 3rem 6rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    #hero {
+      padding: 11rem 6rem 7rem;
+    }
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .hero-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--heroBgUrl) center center / cover no-repeat;
+    opacity: 0.55;
+  }
+  .hero-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        to right,
+        var(--color-bg) 0%,
+        color-mix(in oklch, var(--color-bg) 75%, transparent) 30%,
+        color-mix(in oklch, var(--color-bg) 15%, transparent) 55%,
+        transparent 100%
+      ),
+      linear-gradient(to top, var(--color-bg) 0%, transparent 40%);
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 38rem;
+  }
+
+  .badge {
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.5);
+  }
+
+  .headline {
+    font-family: var(--font-display);
+    font-size: clamp(3.25rem, 6.5vw, 6rem);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.045em;
+    color: var(--color-text);
+    margin: 0 0 1.75rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .headline-accent {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .subheadline {
+    font-size: clamp(1.1rem, 1.55vw, 1.3rem);
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--color-muted);
+    max-width: 44ch;
+    margin: 0 0 1.5rem;
+  }
+
+  .author-note {
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--color-muted);
+    background-color: color-mix(in oklch, var(--color-surface) 50%, transparent);
+    border: 1px solid color-mix(in oklch, var(--color-border) 40%, transparent);
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2.5rem;
+    max-width: 44ch;
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .note-icon {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+    color: var(--color-warning);
+  }
+
+  .cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+    align-items: center;
+  }
+</style>

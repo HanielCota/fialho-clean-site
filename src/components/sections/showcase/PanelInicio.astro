@@ -1,0 +1,226 @@
+---
+import StatusBanner from "@/components/sections/showcase/StatusBanner.astro";
+import { Trash2, LayoutGrid, Zap, Wrench } from "@lucide/astro";
+---
+
+<StatusBanner />
+
+<!-- Quick actions -->
+<div class="quick-actions">
+  <div class="qa-card">
+    <div class="qa-icon">
+      <Trash2 size={20} stroke-width={1.5} />
+    </div>
+    <span class="qa-label">Limpar o PC</span>
+  </div>
+  <div class="qa-card">
+    <div class="qa-icon">
+      <LayoutGrid size={20} stroke-width={1.5} />
+    </div>
+    <span class="qa-label">Remover Apps</span>
+  </div>
+  <div class="qa-card">
+    <div class="qa-icon">
+      <Zap size={20} stroke-width={1.5} />
+    </div>
+    <span class="qa-label">Mais Rápido</span>
+  </div>
+  <div class="qa-card">
+    <div class="qa-icon">
+      <Wrench size={20} stroke-width={1.5} />
+    </div>
+    <span class="qa-label">Ajustes</span>
+  </div>
+</div>
+
+<!-- Stats row -->
+<div class="stats-row">
+  <div class="stat-card">
+    <div class="stat-top">
+      <span class="stat-value">222 GB</span>
+      <span class="stat-badge stat-badge--good">livre</span>
+    </div>
+    <div class="stat-bar"><div class="stat-fill" data-fill="66%" style="width:0"></div></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-top">
+      <span class="stat-value">113 GB</span>
+      <span class="stat-badge">usado</span>
+    </div>
+    <div class="stat-bar">
+      <div class="stat-fill stat-fill--muted" data-fill="34%" style="width:0"></div>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-top">
+      <span class="stat-value">65%</span>
+      <span class="stat-badge">de uso</span>
+    </div>
+    <div class="stat-bar">
+      <div class="stat-fill stat-fill--warn" data-fill="65%" style="width:0"></div>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-top">
+      <span class="stat-value">2h 43m</span>
+      <span class="stat-badge">uptime</span>
+    </div>
+    <div class="stat-mini-chart">
+      <div class="mini-bar" style="height:40%"></div>
+      <div class="mini-bar" style="height:60%"></div>
+      <div class="mini-bar" style="height:45%"></div>
+      <div class="mini-bar" style="height:80%"></div>
+      <div class="mini-bar" style="height:55%"></div>
+      <div class="mini-bar" style="height:70%"></div>
+      <div class="mini-bar" style="height:90%"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .quick-actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+  }
+  .qa-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.9rem 0.4rem;
+    background: linear-gradient(180deg, #141414 0%, var(--color-surface-deep) 100%);
+    border: 1px solid #1c1c1c;
+    border-radius: 10px;
+    cursor: default;
+    transition: border-color var(--duration-fast);
+  }
+  .qa-card:hover {
+    border-color: #2a2a2a;
+  }
+  .qa-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #1e1e1e 0%, #181818 100%);
+    border: 1px solid var(--color-border-mid);
+    color: var(--color-muted);
+  }
+  .qa-label {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--color-muted);
+    text-align: center;
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+  }
+  .stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.85rem 0.9rem;
+    background: linear-gradient(180deg, #141414 0%, var(--color-surface-deep) 100%);
+    border: 1px solid #1c1c1c;
+    border-radius: 10px;
+  }
+  .stat-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.3rem;
+  }
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+  }
+  .stat-badge {
+    font-size: var(--text-2xs);
+    font-weight: 600;
+    color: var(--color-muted-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.04);
+  }
+  .stat-badge--good {
+    color: var(--color-success);
+    background-color: color-mix(in oklch, var(--color-success) 10%, transparent);
+  }
+  .stat-bar {
+    height: 3px;
+    background-color: #1c1c1c;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .stat-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--color-success) 0%, #16a34a 100%);
+    transition: width 700ms var(--ease-out);
+  }
+  .stat-fill--muted {
+    background: linear-gradient(90deg, var(--color-muted-deep) 0%, var(--color-muted-deep) 100%);
+  }
+  .stat-fill--warn {
+    background: linear-gradient(90deg, var(--color-warning) 0%, #ca8a04 100%);
+  }
+  .stat-mini-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 20px;
+  }
+  .mini-bar {
+    flex: 1;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+    border-radius: 1.5px;
+    min-width: 3px;
+  }
+
+  @media (max-width: 768px) {
+    .quick-actions,
+    .stats-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+
+<script>
+  const panel = document.getElementById("panel-inicio");
+  if (panel) {
+    function animateBars() {
+      panel!.querySelectorAll<HTMLElement>("[data-fill]").forEach((bar, i) => {
+        setTimeout(() => {
+          bar.style.width = bar.dataset.fill ?? "0%";
+        }, i * 80);
+      });
+    }
+
+    if (panel.classList.contains("active")) {
+      requestAnimationFrame(animateBars);
+    } else {
+      const mo = new MutationObserver(() => {
+        if (panel.classList.contains("active")) {
+          requestAnimationFrame(animateBars);
+          mo.disconnect();
+        }
+      });
+      mo.observe(panel, { attributes: true, attributeFilter: ["class"] });
+    }
+  }
+</script>

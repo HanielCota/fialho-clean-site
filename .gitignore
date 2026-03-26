@@ -1,0 +1,31 @@
+# Build
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# System
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/settings.json
+.idea/
+
+# AI tooling
+.agents/
+.claude/
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*

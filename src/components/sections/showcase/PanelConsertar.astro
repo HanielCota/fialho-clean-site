@@ -1,0 +1,188 @@
+---
+import PanelHeader from "@/components/sections/showcase/PanelHeader.astro";
+import MockButton from "@/components/sections/showcase/MockButton.astro";
+---
+
+<PanelHeader title="Consertar o PC" description="Corrija erros comuns do Windows automaticamente" />
+<div class="alert-banner">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+    ><path
+      d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"></path></svg
+  >
+  <span>Estas ferramentas precisam de permissão de administrador.</span>
+</div>
+<div class="repair-grid">
+  <div class="repair-card">
+    <div class="repair-icon repair-icon--shield">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+        ><path
+          d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path></svg
+      >
+    </div>
+    <div class="repair-info">
+      <strong>Criar Ponto de Restauração</strong>
+      <small>Salve o estado atual do PC antes de fazer alterações</small>
+    </div>
+    <MockButton variant="primary" size="sm">Criar</MockButton>
+  </div>
+  <div class="repair-card">
+    <div class="repair-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+        ><path
+          d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path></svg
+      >
+    </div>
+    <div class="repair-info">
+      <strong>FialhoClean Backup</strong>
+      <small>Backup das suas configurações e preferências</small>
+    </div>
+    <MockButton variant="ghost" size="sm">Backup</MockButton>
+  </div>
+  <div class="repair-card">
+    <div class="repair-icon repair-icon--check">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+        ><path
+          d="M9 11l3 3L22 4"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path><path
+          d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path></svg
+      >
+    </div>
+    <div class="repair-info">
+      <strong>Verificar Arquivos do Sistema</strong>
+      <small>Executa o verificador de integridade (SFC)</small>
+    </div>
+    <MockButton variant="primary" size="sm">Verificar</MockButton>
+  </div>
+  <div class="repair-card">
+    <div class="repair-icon repair-icon--fix">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+        ><path
+          d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94L14.7 6.3z"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path></svg
+      >
+    </div>
+    <div class="repair-info">
+      <strong>Corrigir o Windows</strong>
+      <small>Executa o DISM quando o SFC não resolve</small>
+    </div>
+    <MockButton variant="primary" size="sm">Corrigir</MockButton>
+  </div>
+</div>
+
+<style>
+  .alert-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 0.85rem;
+    background-color: color-mix(in oklch, var(--color-warning) 4%, transparent);
+    border: 1px solid color-mix(in oklch, var(--color-warning) 12%, transparent);
+    border-radius: 8px;
+    font-size: var(--text-sm);
+    color: #ca8a04;
+    line-height: 1.5;
+  }
+  .alert-banner svg {
+    flex-shrink: 0;
+    color: var(--color-warning);
+  }
+
+  .repair-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .repair-card {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.9rem 1rem;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 10px;
+    transition: border-color var(--duration-fast);
+  }
+  .repair-card:hover {
+    border-color: var(--color-border-mid);
+  }
+
+  .repair-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #1a1a1a, #141414);
+    border: 1px solid var(--color-border-mid);
+    color: #9a9a9a;
+    flex-shrink: 0;
+  }
+  .repair-icon--shield {
+    color: var(--color-info);
+    border-color: color-mix(in oklch, var(--color-info) 20%, transparent);
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--color-info) 8%, transparent),
+      color-mix(in oklch, var(--color-info) 3%, transparent)
+    );
+  }
+  .repair-icon--check {
+    color: var(--color-success);
+    border-color: color-mix(in oklch, var(--color-success) 20%, transparent);
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--color-success) 8%, transparent),
+      color-mix(in oklch, var(--color-success) 3%, transparent)
+    );
+  }
+  .repair-icon--fix {
+    color: var(--color-warning);
+    border-color: color-mix(in oklch, var(--color-warning) 20%, transparent);
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--color-warning) 8%, transparent),
+      color-mix(in oklch, var(--color-warning) 3%, transparent)
+    );
+  }
+
+  .repair-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+  }
+  .repair-info strong {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+  .repair-info small {
+    font-size: var(--text-xs);
+    color: var(--color-muted-dim);
+    line-height: 1.5;
+  }
+</style>

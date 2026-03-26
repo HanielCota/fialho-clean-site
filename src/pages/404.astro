@@ -1,0 +1,62 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Pagina nao encontrada — FialhoClean"
+  description="A pagina que voce procura nao existe."
+>
+  <main class="error-page">
+    <div class="error-content">
+      <h1 class="error-code">404</h1>
+      <p class="error-message">Pagina nao encontrada.</p>
+      <a href="/" class="error-link">← Voltar ao inicio</a>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .error-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .error-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .error-code {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 10vw, 6rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .error-message {
+    font-size: var(--text-lg);
+    color: var(--color-muted);
+    margin: 0.5rem 0 1.5rem;
+  }
+
+  .error-link {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .error-link:hover {
+    opacity: 0.75;
+  }
+</style>

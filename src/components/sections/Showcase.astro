@@ -1,0 +1,211 @@
+---
+import Section from "@/components/ui/Section.astro";
+import AppWindow from "@/components/sections/showcase/AppWindow.astro";
+import PanelInicio from "@/components/sections/showcase/PanelInicio.astro";
+import PanelLimpeza from "@/components/sections/showcase/PanelLimpeza.astro";
+import PanelVelocidade from "@/components/sections/showcase/PanelVelocidade.astro";
+import PanelApps from "@/components/sections/showcase/PanelApps.astro";
+import PanelConsertar from "@/components/sections/showcase/PanelConsertar.astro";
+import { SHOWCASE_TABS } from "@/constants/showcase";
+---
+
+<Section
+  id="showcase"
+  badge="Preview do App"
+  title="Design limpo, como seu PC."
+  subtitle="5 módulos, interface escura, sem firula. Veja como o app funciona por dentro."
+>
+  <div class="showcase-container">
+    <div class="tabs-list" role="tablist" aria-label="Módulos do FialhoClean">
+      {
+        SHOWCASE_TABS.map((tab) => (
+          <button
+            role="tab"
+            aria-selected={tab.active ? "true" : "false"}
+            aria-controls={`panel-${tab.id}`}
+            id={`tab-${tab.id}`}
+            class:list={["tab-btn", { active: tab.active }]}
+            data-tab={tab.id}
+          >
+            {tab.label}
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="tabs-content">
+      <div class="ambient-glow"></div>
+      <div role="tabpanel" id="panel-inicio" aria-labelledby="tab-inicio" class="tab-panel active">
+        <AppWindow activeItem="inicio"><PanelInicio /></AppWindow>
+      </div>
+      <div role="tabpanel" id="panel-limpeza" aria-labelledby="tab-limpeza" class="tab-panel">
+        <AppWindow activeItem="limpeza"><PanelLimpeza /></AppWindow>
+      </div>
+      <div role="tabpanel" id="panel-velocidade" aria-labelledby="tab-velocidade" class="tab-panel">
+        <AppWindow activeItem="velocidade"><PanelVelocidade /></AppWindow>
+      </div>
+      <div role="tabpanel" id="panel-apps" aria-labelledby="tab-apps" class="tab-panel">
+        <AppWindow activeItem="apps"><PanelApps /></AppWindow>
+      </div>
+      <div role="tabpanel" id="panel-consertar" aria-labelledby="tab-consertar" class="tab-panel">
+        <AppWindow activeItem="consertar"><PanelConsertar /></AppWindow>
+      </div>
+    </div>
+  </div>
+</Section>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>(".tab-btn");
+  const panels = document.querySelectorAll<HTMLElement>(".tab-panel");
+
+  function activateTab(tab: HTMLButtonElement) {
+    const id = tab.dataset.tab;
+    tabs.forEach((t) => {
+      t.classList.remove("active");
+      t.setAttribute("aria-selected", "false");
+      t.setAttribute("tabindex", "-1");
+    });
+    panels.forEach((p) => p.classList.remove("active", "entering"));
+    tab.classList.add("active");
+    tab.setAttribute("aria-selected", "true");
+    tab.setAttribute("tabindex", "0");
+    const target = document.getElementById(`panel-${id}`);
+    if (target) {
+      target.classList.add("active", "entering");
+      target.addEventListener("animationend", () => target.classList.remove("entering"), {
+        once: true,
+      });
+    }
+  }
+
+  const tabArray = Array.from(tabs);
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => activateTab(tab));
+
+    tab.addEventListener("keydown", (e) => {
+      const keyMap: Record<string, number> = {
+        ArrowRight: (index + 1) % tabArray.length,
+        ArrowLeft: (index - 1 + tabArray.length) % tabArray.length,
+        Home: 0,
+        End: tabArray.length - 1,
+      };
+
+      const targetIndex = keyMap[e.key];
+      if (targetIndex === undefined) return;
+
+      e.preventDefault();
+      tabArray[targetIndex].focus();
+      activateTab(tabArray[targetIndex]);
+    });
+  });
+
+  // Set initial tabindex: only active tab is in tab order
+  tabs.forEach((tab) => {
+    tab.setAttribute("tabindex", tab.classList.contains("active") ? "0" : "-1");
+  });
+</script>
+
+<style>
+  .showcase-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .tabs-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.35rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 9999px;
+  }
+
+  .tab-btn {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-muted);
+    background: transparent;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all var(--duration-fast) ease;
+  }
+
+  .tab-btn:hover {
+    color: var(--color-text);
+  }
+
+  .tab-btn.active {
+    color: var(--color-bg);
+    background-color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .tabs-content {
+    width: 100%;
+    max-width: 1080px;
+    position: relative;
+    border-radius: 16px;
+  }
+
+  .ambient-glow {
+    position: absolute;
+    inset: -1px;
+    border-radius: 17px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      transparent 40%,
+      transparent 60%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .ambient-glow::before {
+    content: "";
+    position: absolute;
+    inset: -60px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .tab-panel {
+    display: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tab-panel.active {
+    display: block;
+  }
+
+  .tab-panel.entering {
+    animation: mock-fade 350ms var(--ease-out) forwards;
+  }
+
+  @keyframes mock-fade {
+    from {
+      opacity: 0;
+      transform: translateY(6px) scale(0.997);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tab-panel.entering {
+      animation: none;
+    }
+  }
+</style>

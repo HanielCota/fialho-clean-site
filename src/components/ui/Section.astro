@@ -1,0 +1,35 @@
+---
+import SectionHeader from "./SectionHeader.astro";
+
+interface Props {
+  id: string;
+  badge: string;
+  title: string;
+  subtitle: string;
+  border?: boolean;
+}
+
+const { id, badge, title, subtitle, border = true } = Astro.props;
+---
+
+<section
+  id={id}
+  class:list={["section-wrapper page-padding", { "border-top": border }]}
+  data-animate
+>
+  <div class="page-container">
+    <SectionHeader {badge} {title} {subtitle} />
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section-wrapper {
+    position: relative;
+    padding-block: 8rem;
+  }
+
+  .border-top {
+    border-top: 1px solid var(--color-border);
+  }
+</style>
