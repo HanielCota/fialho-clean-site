@@ -3,6 +3,10 @@ import { Download as DownloadIcon } from "@lucide/astro";
 import IconGitHub from "@/components/ui/IconGitHub.astro";
 import Button from "@/components/ui/Button.astro";
 import { SITE } from "@/config/site";
+import { getLatestDownload } from "@/services/github";
+
+const { url: downloadUrl, version } = await getLatestDownload();
+const downloadLabel = version ? `Baixar ${version}` : "Baixar Fialho Optimizer";
 ---
 
 <section id="download" class="page-padding">
@@ -12,14 +16,14 @@ import { SITE } from "@/config/site";
       <p class="cta-subtitle">Sem cadastro, sem instalação. Baixa o .exe e roda. Leva segundos.</p>
       <div class="cta-buttons">
         <Button
-          href={SITE.github.releasesLatest}
+          href={downloadUrl}
           variant="primary"
           size="lg"
           icon={DownloadIcon}
           target="_blank"
           rel="noopener noreferrer"
         >
-          Baixar Fialho Optimizer
+          {downloadLabel}
         </Button>
         <Button
           href={SITE.github.repo}
